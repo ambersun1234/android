@@ -17,7 +17,7 @@
 
     <!-- calculate input -->
     <TextView
-        android:id="@+id/acalc_input"
+        android:id="@+id/history_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -27,7 +27,7 @@
 
     <!-- calculate result -->
     <TextView
-        android:id="@+id/acalc_result"
+        android:id="@+id/acalc_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="C" />
         <Button
-            android:id="@+id/keyboard_operation"
+            android:id="@+id/keyboard_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+/-" />
