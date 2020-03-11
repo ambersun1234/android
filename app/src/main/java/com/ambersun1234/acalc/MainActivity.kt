@@ -1,11 +1,17 @@
 package com.ambersun1234.acalc
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.text.isDigitsOnly
+import kotlinx.android.synthetic.main.activity_main.*
+
+enum class keyboard_type {
+    clear, calculate, equal, input, sign
+}
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,29 +43,62 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun validClear(input: Int): Int {
+    fun distinguish(input: Int): keyboard_type {
         val btnText = findViewById<Button>(input).text.toString()
 
-        val rt_zero = btnText == "0"
-        val rt_clear = btnText == "C"
+        if (btnText == "C") return keyboard_type.clear
+        else if (btnText == "=") return keyboard_type.equal
+        else if (btnText == "+/-") return keyboard_type.sign
+        else if (btnText == "0") {
+            if (this.input_text == "") return keyboard_type.clear
+            else return keyboard_type.input
+        }
+        else return keyboard_type.input
+    }
 
-        return if (rt_zero || rt_clear) 0 else 1
+    fun updateSign(): Boolean {
+        if (this.input_text != "") {
+            val strFirst = this.input_text!!.first()
+            if (strFirst != '-') {
+                val tmp = "-" + this.input_text
+                this.input_text = tmp
+                this.result_view?.text = tmp
+            } else {
+                this.input_text = this.input_text!!.substring(1)
+                this.result_view?.text = this.result_view?.text!!.substring(1)
+            }
+        }
+        return true
+    }
+
+    fun calResult(): Boolean {
+        return true
     }
 
     fun onClick(btn: Int, inputOp: String) {
-        val clearrt = this.validClear(btn)
+        val clearrt = this.distinguish(btn)
 
-        if (clearrt == 0) {
-            // clear
-            if (this.result_view?.text != "0") {
-                this.history_view?.text = this.result_view?.text
-                this.result_view?.text = "0"
-                this.input_text = ""
-            }
-        } else {
-            // no clear
-            this.input_text = this.input_text?.plus(inputOp)
-            this.result_view?.text = this.input_text
+        when (clearrt) {
+           keyboard_type.clear -> {
+               // clear
+               this.history_view?.text = this.result_view?.text
+               this.result_view?.text = "0"
+               this.input_text = ""
+           }
+           keyboard_type.sign -> {
+               this.updateSign()
+           }
+           keyboard_type.calculate -> {
+               this.calResult()
+           }
+           keyboard_type.input -> {
+               this.input_text = this.input_text?.plus(inputOp)
+               this.result_view?.text = this.input_text
+           }
+           keyboard_type.equal -> {
+               // press equal
+               this.calResult()
+           }
         }
     }
 }
