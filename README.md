@@ -1,10 +1,5 @@
-# acalc
-A simple caculater for android using kotlin
-
-# Clone
-```
-git clone https://github.com/ambersun1234/acalc.git
-```
+# andoird
++ Collection of all android homework
 
 # Config
 + This project is build with `pixel 3A XL` layout with `Android 8.0 Oreo`
