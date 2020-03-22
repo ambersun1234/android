@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">猜數字</string>
+    <string name="prompt">請輸入數字(1 ~ 100)</string>
+    <string name="again">再玩一次!</string>
+    <string name="tb">數字太大!</string>
+    <string name="ts">數字太小!</string>
+    <string name="correct">答對了!</string>
+    <string name="timePrompt1">你總共猜了:</string>
+    <string name="timePrompt2">次.</string>
+    <string name="initPrompt">你的輸入會顯示於此.</string>
+    <string name="inputPrompt">你的輸入:</string>
+</resources>

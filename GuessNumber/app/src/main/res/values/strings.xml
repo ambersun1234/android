@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GuessNumber</string>
+    <string name="prompt">Please enter a number(1 ~ 100)</string>
+    <string name="again">Play again!</string>
+    <string name="tb">Too big!</string>
+    <string name="ts">Too small!</string>
+    <string name="correct">Correct!</string>
+    <string name="timePrompt1">Your total guess:</string>
+    <string name="timePrompt2">times.</string>
+    <string name="initPrompt">Your input will show in here.</string>
+    <string name="inputPrompt">Your input:</string>
+</resources>
