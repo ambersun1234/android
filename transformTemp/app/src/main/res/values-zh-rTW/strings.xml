@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">單位轉換器</string>
+    <string name="m2f">公尺轉英呎</string>
+    <string name="f2m">英呎轉公尺</string>
+    <string name="prompt">請輸入數字</string>
+</resources>
