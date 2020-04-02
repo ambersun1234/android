@@ -1,4 +1,4 @@
-package com.ambersun1234.transformtemp
+package com.ambersun1234.lengthconverter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,29 +28,29 @@ class MainActivity : AppCompatActivity() {
         this.result_view = findViewById(R.id.showResult)
         this.inputText = findViewById(R.id.input_val)
         this.inputText!!.addTextChangedListener(
-            object :TextWatcher{
-                override fun afterTextChanged(
-                    s: Editable?) {
-                    Unit
-                }
+                object :TextWatcher{
+                    override fun afterTextChanged(
+                            s: Editable?) {
+                        Unit
+                    }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                    Unit
-                }
+                    override fun beforeTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            count: Int,
+                            after: Int
+                    ) {
+                        Unit
+                    }
 
-                override fun onTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    before: Int,
-                    count: Int) {
-                    calculate()
-                }
-            } // end implement super function
+                    override fun onTextChanged(
+                            s: CharSequence?,
+                            start: Int,
+                            before: Int,
+                            count: Int) {
+                        calculate()
+                    }
+                } // end implement super function
         )
 
         this.inputGroup = findViewById(R.id.transformG)

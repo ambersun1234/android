@@ -1,2 +1,2 @@
-rootProject.name='transformTemp'
+rootProject.name='lengthConverter'
 include ':app'
