@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">temperatureConverter</string>
+    <string name="prompt">Enter transform unit and value</string>
+    <string name="lala">=</string>
+    <string name="input_prompt">temperature</string>
+    <string-array name="temperatureList">
+        <item>Fahrenheit(F)</item>
+        <item>Celsius(C)</item>
+        <item>Kelvin(K)</item>
+    </string-array>
+</resources>

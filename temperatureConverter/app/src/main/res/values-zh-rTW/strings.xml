@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">temperatureConverter</string>
+    <string name="prompt">請輸入轉換單位以及溫度</string>
+    <string name="lala">=</string>
+    <string name="input_prompt">溫度</string>
+    <string-array name="temperatureList">
+        <item>華氏(F)</item>
+        <item>攝氏(C)</item>
+        <item>絕對溫度(K)</item>
+    </string-array>
+</resources>
