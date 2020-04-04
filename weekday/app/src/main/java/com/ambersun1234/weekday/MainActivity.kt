@@ -3,10 +3,7 @@ package com.ambersun1234.weekday
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 
 class MainActivity : AppCompatActivity() {
     private val mylistener = object: AdapterView.OnItemClickListener{
@@ -21,6 +18,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
     }
+    private var myadapter: SimpleAdapter ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +26,31 @@ class MainActivity : AppCompatActivity() {
 
         val lv = findViewById<ListView>(R.id.mylistview)
 
-        lv.adapter = ArrayAdapter<String>(
+//        // ArrayAdapter way
+//        lv.adapter = ArrayAdapter<String>(
+//            this,
+//            R.layout.support_simple_spinner_dropdown_item,
+//            resources.getStringArray(R.array.weekday_list)
+//        )
+
+        val dataList: ArrayList<Map<String, Any>> = ArrayList()
+
+        for (i in 0..6) {
+            val tmap = hashMapOf<String, Any>()
+            tmap.put("myimg", android.R.drawable.btn_star)
+            tmap.put("mytext", resources.getStringArray(R.array.weekday_list)[i])
+            dataList.add(tmap)
+        }
+
+        this.myadapter = SimpleAdapter(
             this,
-            R.layout.support_simple_spinner_dropdown_item,
-            resources.getStringArray(R.array.weekday_list)
+            dataList,
+            R.layout.listview_pic,
+            arrayOf("myimg", "mytext"),
+            intArrayOf(R.id.myimageView, R.id.mytextView)
         )
+
+        lv.adapter = this.myadapter
 
         lv.onItemClickListener = this.mylistener
     }
