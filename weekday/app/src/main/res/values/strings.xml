@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">weekday</string>
+    <string-array name="weekday_list">
+        <item>星期日</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+    <string name="prompt">請選擇你的放假日</string>
+    <string name="toast_prefix">你選擇了: </string>
+</resources>
