@@ -1,0 +1,2 @@
+rootProject.name='mulConverter'
+include ':app'

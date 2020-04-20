@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">multi converter</string>
+    <string name="category">請選擇類別：</string>
+
+    <string name="ft2in">英呎=>英吋</string>
+    <string name="ft2yd">英呎=>碼</string>
+    <string name="in2ft">英吋=>英呎</string>
+    <string name="in2yd">英吋=>碼</string>
+    <string name="yd2ft">碼=>英呎</string>
+    <string name="yd2in">碼=>英吋</string>
+    <string name="input">輸入值</string>
+
+    <string name="a2b">平方公尺=>坪</string>
+    <string name="b2a">坪=>平方公尺</string>
+    <!-- more -->
+
+    <string name="hint">輸入值</string>
+
+    <string-array name="spinnerArr">
+        <item>長度</item>
+        <item>面積</item>
+    </string-array>
+
+</resources>
