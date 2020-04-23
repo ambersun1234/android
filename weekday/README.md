@@ -28,8 +28,9 @@ simple weekday choose based on simple adapter
 
         for (i in 0..6) {
             val tmap = hashMapOf<String, Any>()
-            tmap.put("myimg", android.R.drawable.btn_star)
+            tmap.put("myimg", if (i % 2 == 0) android.R.drawable.btn_star else android.R.drawable.btn_radio)
             tmap.put("mytext", resources.getStringArray(R.array.weekday_list)[i])
+            tmap.put("mytext2", resources.getStringArray(R.array.weekday_list_en)[i])
             dataList.add(tmap)
         }
 
@@ -37,7 +38,7 @@ simple weekday choose based on simple adapter
             this,
             dataList,
             R.layout.listview_pic,
-            arrayOf("myimg", "mytext"),
-            intArrayOf(R.id.myimageView, R.id.mytextView)
+            arrayOf("myimg", "mytext", "mytext2"),
+            intArrayOf(R.id.myimageView, R.id.mytextView, R.id.mytextView2)
         )
     ```

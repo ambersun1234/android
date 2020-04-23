@@ -10,6 +10,16 @@
         <item>星期六</item>
     </string-array>
 
+    <string-array name="weekday_list_en">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
     <string-array name="weekday_pic_list">
         <item>@android:drawable/btn_star</item>
         <item>@android:drawable/btn_star</item>

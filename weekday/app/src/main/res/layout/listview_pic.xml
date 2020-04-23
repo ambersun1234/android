@@ -11,11 +11,23 @@
         android:layout_height="50dp"
         app:srcCompat="@android:drawable/btn_star" />
 
-    <TextView
-        android:id="@+id/mytextView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/mytextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/mytextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"/>
+    </LinearLayout>
 </LinearLayout>
