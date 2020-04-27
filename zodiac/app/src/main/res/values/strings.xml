@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">1082mid</string>
+
+    <string-array name="month_arr">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+
+    <string-array name="date_arr">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="star_zh">
+        <item>魔羯座</item>
+        <item>水瓶座</item>
+        <item>双魚座</item>
+        <item>牡羊座</item>
+        <item>金牛座</item>
+        <item>双子座</item>
+        <item>巨蟹座</item>
+        <item>獅子座</item>
+        <item>處女座</item>
+        <item>天秤座</item>
+        <item>天蠍座</item>
+        <item>射手座</item>
+    </string-array>
+
+    <string-array name="star_en">
+        <item>Capricorn</item>
+        <item>Aquarius</item>
+        <item>Pisces</item>
+        <item>Aries</item>
+        <item>Taurus</item>
+        <item>Gemini</item>
+        <item>Cancer</item>
+        <item>Leo</item>
+        <item>Virgo</item>
+        <item>Libra</item>
+        <item>Scorpio</item>
+        <item>Sagittarius</item>
+    </string-array>
+
+    <string-array name="star_date">
+        <item>12/22 ~ 1/19</item>
+        <item>1/20 ~ 2/18</item>
+        <item>2/19 ~ 3/20</item>
+        <item>3/21 ~ 4/19</item>
+        <item>4/20 ~ 5/20</item>
+        <item>5/21 ~ 6/20</item>
+        <item>6/21 ~ 7/22</item>
+        <item>7/23 ~ 8/22</item>
+        <item>8/23 ~ 9/22</item>
+        <item>9/23 ~ 10/22</item>
+        <item>10/23 ~ 11/21</item>
+        <item>11/22 ~ 12/21</item>
+    </string-array>
+</resources>

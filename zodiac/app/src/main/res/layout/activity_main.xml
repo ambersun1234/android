@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="195dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="44dp"
+        android:text="請選擇生日日期"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_month"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:entries="@array/month_arr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/spinner_date"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:entries="@array/date_arr"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/t_month"
+        app:layout_constraintTop_toTopOf="@+id/t_month" />
+
+    <TextView
+        android:id="@+id/t_month"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:text="月"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/spinner_month"
+        app:layout_constraintTop_toTopOf="@+id/spinner_month" />
+
+    <TextView
+        android:id="@+id/t_date"
+        android:layout_width="71dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:text="日"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/spinner_date"
+        app:layout_constraintTop_toTopOf="@+id/spinner_date" />
+
+    <EditText
+        android:id="@+id/input_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="104dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="請輸入姓名"
+        android:textSize="25sp"
+        android:imeOptions="actionDone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/rview_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="12dp"
+        android:text="顯示查詢紀錄"
+        app:layout_constraintStart_toStartOf="@+id/input_name"
+        app:layout_constraintTop_toBottomOf="@+id/input_name" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="207dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="4dp"
+        android:text="查詢結果"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/input_name"
+        app:layout_constraintTop_toBottomOf="@+id/input_name" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myrview"
+        android:layout_width="387dp"
+        android:layout_height="394dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintStart_toStartOf="@+id/spinner_month"
+        app:layout_constraintTop_toBottomOf="@+id/input_name" />
+</androidx.constraintlayout.widget.ConstraintLayout>
