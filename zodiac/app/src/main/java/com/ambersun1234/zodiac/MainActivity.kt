@@ -1,20 +1,20 @@
 package com.ambersun1234.zodiac;
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class constant {
     companion object {
         val date_map = mapOf<Int, Int>(
-                1 to 31, 2 to 30, 3 to 31, 4 to 30, 5 to 31, 6 to 30,
-                7 to 31, 8 to 31, 9 to 30, 10 to 31, 11 to 30, 12 to 31
+            1 to 31, 2 to 30, 3 to 31, 4 to 30, 5 to 31, 6 to 30,
+            7 to 31, 8 to 31, 9 to 30, 10 to 31, 11 to 30, 12 to 31
         )
     }
 }
@@ -25,10 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var input: EditText
     private lateinit var res: TextView
     private lateinit var btn: Button
-
-    private lateinit var myrview: RecyclerView
-    private lateinit var myrviewAdapter: RecyclerView.Adapter<*>
-    private lateinit var myrviewManager: RecyclerView.LayoutManager
+    private lateinit var ex: Bundle
 
     private var name_arr: ArrayList<String> = ArrayList()
     private var star_arr: ArrayList<String> = ArrayList()
@@ -39,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 storeInfo()
-                createR()
                 return true
             }
             return false
@@ -58,69 +54,34 @@ class MainActivity : AppCompatActivity() {
 
     private val myClickListener = object: View.OnClickListener {
         override fun onClick(v: View?) {
-            if (myrview.visibility == View.INVISIBLE) {
-                myrview.visibility = View.VISIBLE
-                rview_btn.text = "隱藏查詢紀錄"
-            }
-            else {
-                myrview.visibility = View.INVISIBLE
-                rview_btn.text = "顯示查詢紀錄"
-            }
+            val it = Intent(this@MainActivity, ShowActivity::class.java)
+            it.putStringArrayListExtra("name", name_arr)
+            it.putStringArrayListExtra("date", date_arr)
+            it.putStringArrayListExtra("star", star_arr)
+            it.putIntegerArrayListExtra("img" , img_arr)
+            startActivityForResult(it, 0x111)
         }
-    }
-
-    fun createR() {
-        this.myrviewAdapter = myAdapter(
-                this.name_arr,
-                this.date_arr,
-                this.star_arr,
-                this.img_arr,
-                baseContext // https://stackoverflow.com/a/7666630
-        )
-
-        this.myrview.adapter = this.myrviewAdapter
     }
 
     fun id(m: Int, d: Int): Int {
-        if ((m == 12 && 22 <= d && d <= 31) || (m == 1 && 1 <= d && d <= 19)) {
-            return 0
-        }
-        if ((m == 1 && 20 <= d && d <= 31) || (m == 2 && 1 <= d && d <= 18)) {
-            return 1
-        }
-        if ((m == 2 && 19 <= d && d <= 30) || (m == 3 && 1 <= d && d <= 20)) {
-            return 2
-        }
-        if ((m == 3 && 21 <= d && d <= 31) || (m == 4 && 1 <= d && d <= 19)) {
-            return 3
-        }
-        if ((m == 4 && 20 <= d && d <= 30) || (m == 5 && 1 <= d && d <= 20)) {
-            return 4
-        }
-        if ((m == 5 && 21 <= d && d <= 31) || (m == 6 && 1 <= d && d <= 20)) {
-            return 5
-        }
-        if ((m == 6 && 21 <= d && d <= 30) || (m == 7 && 1 <= d && d <= 22)) {
-            return 6
-        }
-        if ((m == 7 && 23 <= d && d <= 31) || (m == 8 && 1 <= d && d <= 22)) {
-            return 7
-        }
-        if ((m == 8 && 23 <= d && d <= 31) || (m == 9 && 1 <= d && d <= 22)) {
-            return 8
-        }
-        if ((m == 9 && 23 <= d && d <= 30) || (m == 10 && 1<= d && d <= 22)) {
-            return 9
-        }
-        if ((m == 10 && 23 <= d && d <= 31) || (m == 11 &&  1<= d && d <= 21)) {
-            return 10
-        }
-        if ((m == 11 && 22 <= d && d <= 30) || (m == 12 &&  1<= d && d <= 21)) {
-            return 11
+        when (m) {
+            12 -> return if (d in 22..31) 0  else 11
+            1  -> return if (d in  1..19) 0  else 1
+            2  -> return if (d in  1..18) 1  else 2
+            3  -> return if (d in  1..20) 2  else 3
+            4  -> return if (d in  1..19) 3  else 4
+            5  -> return if (d in  1..20) 4  else 5
+            6  -> return if (d in  1..20) 5  else 6
+            7  -> return if (d in  1..22) 6  else 7
+            8  -> return if (d in  1..22) 7  else 8
+            9  -> return if (d in  1..22) 8  else 9
+            10 -> return if (d in  1..22) 9  else 10
+            11 -> return if (d in  1..21) 10 else 11
         }
         return -1
     }
 
+    @SuppressLint("SetTextI18n")
     fun storeInfo(): Boolean {
         val m = this.sp_m.selectedItem.toString()
         val d = this.sp_d.selectedItem.toString()
@@ -129,9 +90,9 @@ class MainActivity : AppCompatActivity() {
         val star = resources.getStringArray(R.array.star_zh)[res]
         if (name == "") {
             Toast.makeText(
-                    this.baseContext,
-                    "輸入姓名才可查詢",
-                    Toast.LENGTH_SHORT
+                this.baseContext,
+                "輸入姓名才可查詢",
+                Toast.LENGTH_SHORT
             ).show()
             return true
         }
@@ -156,9 +117,9 @@ class MainActivity : AppCompatActivity() {
 
         if (d > constant.date_map[m]!!) {
             Toast.makeText(
-                    this.baseContext,
-                    "日期錯誤!",
-                    Toast.LENGTH_SHORT
+                this.baseContext,
+                "日期錯誤!",
+                Toast.LENGTH_SHORT
             ).show()
             rt = false
         } else {
@@ -166,6 +127,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         return rt
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0x111 && resultCode == Activity.RESULT_OK) {
+            this.ex = intent.extras!!
+
+            // retrieve data from activity
+            this.name_arr = this.ex.getStringArrayList("name")!!
+            this.date_arr = this.ex.getStringArrayList("date")!!
+            this.star_arr = this.ex.getStringArrayList("star")!!
+            this.img_arr = this.ex.getIntegerArrayList("img")!!
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,16 +151,7 @@ class MainActivity : AppCompatActivity() {
         this.input = findViewById(R.id.input_name)
         this.res = findViewById(R.id.result)
         this.btn = findViewById(R.id.rview_btn)
-        this.myrview = findViewById(R.id.myrview)
 
-        // first set recycler view invisible
-        this.myrview.visibility = View.INVISIBLE
-
-        this.myrview.setHasFixedSize(true)
-        this.myrviewManager = LinearLayoutManager(this)
-        this.myrview.layoutManager = this.myrviewManager
-
-        this.sp_m.onItemSelectedListener = this.mySelectedListener
         this.sp_d.onItemSelectedListener = this.mySelectedListener
         this.input.setOnEditorActionListener(this.myActionListener)
         this.btn.setOnClickListener(this.myClickListener)

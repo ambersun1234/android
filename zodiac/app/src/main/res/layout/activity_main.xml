@@ -89,12 +89,4 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/input_name"
         app:layout_constraintTop_toBottomOf="@+id/input_name" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myrview"
-        android:layout_width="387dp"
-        android:layout_height="394dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_month"
-        app:layout_constraintTop_toBottomOf="@+id/input_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
