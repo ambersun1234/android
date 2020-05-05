@@ -5,6 +5,7 @@
     <string name="deleteConfirm">是否確定刪除</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="date_choose">點我選取日期</string>
 
     <string-array name="month_arr">
         <item>1</item>

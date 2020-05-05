@@ -2,6 +2,7 @@ package com.ambersun1234.zodiac;
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class constant {
     companion object {
@@ -20,17 +23,20 @@ class constant {
 }
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var sp_m: Spinner
-    private lateinit var sp_d: Spinner
+    private lateinit var id: TextView
+    private lateinit var im: TextView
     private lateinit var input: EditText
     private lateinit var res: TextView
     private lateinit var btn: Button
     private lateinit var ex: Bundle
+    private lateinit var dbtn: Button
 
     private var name_arr: ArrayList<String> = ArrayList()
     private var star_arr: ArrayList<String> = ArrayList()
     private var date_arr: ArrayList<String> = ArrayList()
     private var img_arr:  ArrayList<Int>    = ArrayList()
+
+    private val cal = Calendar.getInstance()
 
     private val myActionListener = object: TextView.OnEditorActionListener {
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -42,13 +48,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val mySelectedListener = object: AdapterView.OnItemSelectedListener {
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            date_check()
-        }
+    private val dateSetListener = object: DatePickerDialog.OnDateSetListener {
+        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-            Unit
+            // set selected to TextView
+            id.text = dayOfMonth.toString()
+            im.text = (month + 1).toString()
+            /* https://stackoverflow.com/a/4467894
+             * according to documentation, month start at 0
+             */
+        }
+    }
+
+    private val dateBtnListener = object: View.OnClickListener {
+        override fun onClick(v: View?) {
+            DatePickerDialog(
+                this@MainActivity,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
     }
 
@@ -83,10 +106,10 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun storeInfo(): Boolean {
-        val m = this.sp_m.selectedItem.toString()
-        val d = this.sp_d.selectedItem.toString()
+        val m = this.im.text.toString().toInt()
+        val d = this.id.text.toString().toInt()
         val name = this.input.text.toString()
-        val res = this.id(m.toInt(), d.toInt())
+        val res = this.id(m, d)
         val star = resources.getStringArray(R.array.star_zh)[res]
         if (name == "") {
             Toast.makeText(
@@ -111,8 +134,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun date_check(): Boolean {
-        val d = this.sp_d.selectedItem.toString().toInt()
-        val m = this.sp_m.selectedItem.toString().toInt()
+        val d = this.id.text.toString().toInt()
+        val m = this.im.text.toString().toInt()
         var rt = false
 
         if (d > constant.date_map[m]!!) {
@@ -142,13 +165,14 @@ class MainActivity : AppCompatActivity() {
             this.img_arr = this.ex.getIntegerArrayList("img")!!
         }
 
-        this.sp_m = findViewById(R.id.spinner_month)
-        this.sp_d = findViewById(R.id.spinner_date)
+        this.im = findViewById(R.id.input_month)
+        this.id = findViewById(R.id.input_date)
         this.input = findViewById(R.id.input_name)
         this.res = findViewById(R.id.result)
         this.btn = findViewById(R.id.rview_btn)
+        this.dbtn = findViewById(R.id.date_button)
 
-        this.sp_d.onItemSelectedListener = this.mySelectedListener
+        this.dbtn.setOnClickListener(this.dateBtnListener)
         this.input.setOnEditorActionListener(this.myActionListener)
         this.btn.setOnClickListener(this.myClickListener)
     }
