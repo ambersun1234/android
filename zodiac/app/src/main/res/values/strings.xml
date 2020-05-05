@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">1082mid</string>
     <string name="goback">Go Back to Main</string>
+    <string name="leave">離開</string>
+    <string name="deleteConfirm">是否確定刪除</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 
     <string-array name="month_arr">
         <item>1</item>

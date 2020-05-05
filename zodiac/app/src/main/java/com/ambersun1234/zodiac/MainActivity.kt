@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private var name_arr: ArrayList<String> = ArrayList()
     private var star_arr: ArrayList<String> = ArrayList()
     private var date_arr: ArrayList<String> = ArrayList()
-    private var img_arr: ArrayList<Int> = ArrayList()
+    private var img_arr:  ArrayList<Int>    = ArrayList()
 
     private val myActionListener = object: TextView.OnEditorActionListener {
         override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -129,22 +129,18 @@ class MainActivity : AppCompatActivity() {
         return rt
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0x111 && resultCode == Activity.RESULT_OK) {
-            this.ex = intent.extras!!
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        if (intent.extras != null) {
+            this.ex = intent.extras!!
             // retrieve data from activity
             this.name_arr = this.ex.getStringArrayList("name")!!
             this.date_arr = this.ex.getStringArrayList("date")!!
             this.star_arr = this.ex.getStringArrayList("star")!!
             this.img_arr = this.ex.getIntegerArrayList("img")!!
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         this.sp_m = findViewById(R.id.spinner_month)
         this.sp_d = findViewById(R.id.spinner_date)
