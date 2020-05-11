@@ -3,7 +3,9 @@ package com.ambersun1234.zodiac;
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -19,6 +21,8 @@ class constant {
             1 to 31, 2 to 30, 3 to 31, 4 to 30, 5 to 31, 6 to 30,
             7 to 31, 8 to 31, 9 to 30, 10 to 31, 11 to 30, 12 to 31
         )
+
+        val PREF_FILE_LOCATION = "zodiac"
     }
 }
 
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private val dateSetListener = object: DatePickerDialog.OnDateSetListener {
         override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -65,12 +70,17 @@ class MainActivity : AppCompatActivity() {
 
     private val dateBtnListener = object: View.OnClickListener {
         override fun onClick(v: View?) {
+            val pref: SharedPreferences = getSharedPreferences(
+                constant.PREF_FILE_LOCATION,
+                Context.MODE_PRIVATE
+            )
+
             DatePickerDialog(
                 this@MainActivity,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
+                pref.getInt("month", cal.get(Calendar.MONTH)),
+                pref.getInt("date", cal.get(Calendar.DAY_OF_MONTH))
             ).show()
         }
     }
@@ -104,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         return -1
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "CommitPrefEdits")
     fun storeInfo(): Boolean {
         val m = this.im.text.toString().toInt()
         val d = this.id.text.toString().toInt()
@@ -122,6 +132,17 @@ class MainActivity : AppCompatActivity() {
         if (date_check() == false) {
             return false
         }
+
+        val pref:SharedPreferences = getSharedPreferences(
+            constant.PREF_FILE_LOCATION,
+            Context.MODE_PRIVATE
+        )
+        val ed:SharedPreferences.Editor = pref.edit()
+
+        ed.putInt("month", m - 1)
+        ed.putInt("date", d)
+        ed.putString("name", name)
+        ed.apply()
 
         this.res.text = "生日: $m 月 $d 日\n星座: " + star.toString()
 
@@ -171,6 +192,16 @@ class MainActivity : AppCompatActivity() {
         this.res = findViewById(R.id.result)
         this.btn = findViewById(R.id.rview_btn)
         this.dbtn = findViewById(R.id.date_button)
+
+        // set sharedPreferences
+        val pref: SharedPreferences = getSharedPreferences(
+            constant.PREF_FILE_LOCATION,
+            Context.MODE_PRIVATE
+        )
+        this.input.setText(pref.getString("name", ""))
+        this.im.text = (pref.getInt("month", 1) + 1).toString()
+        // + 1 due to datePickerDialog starting offset
+        this.id.text = pref.getInt("date", 1).toString()
 
         this.dbtn.setOnClickListener(this.dateBtnListener)
         this.input.setOnEditorActionListener(this.myActionListener)

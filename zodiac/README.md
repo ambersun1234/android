@@ -154,3 +154,27 @@ Simple Zodiac app, based on recycler view
     ```
 + `notifyDataSetChanged`
     + if data in RecyclerView has changed, manually call this function(inside or outside), it will refresh
++ `SharedPreferences`
+    + store data in xml
+    ```kotlin
+    val pref:SharedPreferences = getSharedPreferences(
+        constant.PREF_FILE_LOCATION,
+        Context.MODE_PRIVATE
+    )
+    val ed:SharedPreferences.Editor = pref.edit()
+
+    ed.putInt("month", m - 1)
+    ed.putInt("date", d)
+    ed.putString("name", name)
+    ed.apply()
+    
+    // set sharedPreferences
+    val pref: SharedPreferences = getSharedPreferences(
+        constant.PREF_FILE_LOCATION,
+        Context.MODE_PRIVATE
+    )
+    this.input.setText(pref.getString("name", ""))
+    this.im.text = (pref.getInt("month", 1) + 1).toString()
+    // + 1 due to datePickerDialog starting offset
+    this.id.text = pref.getInt("date", 1).toString()
+    ```
