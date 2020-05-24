@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FileProvider</string>
+    <string name="btn_email">email</string>
+    <string name="btn_tel">telephone</string>
+    <string name="btn_text">text</string>
+    <string name="btn_web">website</string>
+    <string name="btn_websearch">web search</string>
+    <string name="btn_gps">gps</string>
+</resources>
