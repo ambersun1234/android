@@ -6,4 +6,7 @@
     <string name="btn_web">website</string>
     <string name="btn_websearch">web search</string>
     <string name="btn_gps">gps</string>
+    <string name="btn_sendbroadcast">send custom broadcast</string>
+    <string name="intent_prompt">Implicit Intent</string>
+    <string name="broadcast_prompt">Broadcast Sender</string>
 </resources>
