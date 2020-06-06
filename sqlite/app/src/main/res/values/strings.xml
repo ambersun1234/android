@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">sqlite</string>
+    <string name="prompt_name">名字:</string>
+    <string name="prompt_address">住址:</string>
+    <string name="prompt_sex">性別:</string>
+    <string name="prompt_male">男性</string>
+    <string name="prompt_female">女性</string>
+    <string name="prompt_none">無</string>
+    <string name="name_hint">請輸入你的名字</string>
+    <string name="address_hint">請輸入你的住址</string>
+    <string name="btn_list">所有列表</string>
+    <string name="btn_query">查詢列表</string>
+    <string name="btn_insert">寫入列表</string>
+</resources>
