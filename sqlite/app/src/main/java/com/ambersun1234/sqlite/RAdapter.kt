@@ -1,14 +1,15 @@
 package com.ambersun1234.sqlite
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import java.sql.Blob
 
 class RAdapter(
     var name_arr:    ArrayList<String>,
@@ -31,11 +32,25 @@ class RAdapter(
         val sql_sex: TextView
         val sql_address: TextView
 
+        private val clickHandler = object: View.OnClickListener {
+            override fun onClick(v: View?) {
+                val it = Intent(v?.context, modifyActivity::class.java)
+                val index = layoutPosition
+
+                it.putExtra("name", name_arr[index])
+                it.putExtra("sex", sex_arr[index])
+                it.putExtra("address", address_arr[index])
+                ccontext.startActivity(it)
+            }
+        }
+
         constructor(tview: View) : super(tview) {
             sql_img     = tview.findViewById(R.id.sql_img)
             sql_name    = tview.findViewById(R.id.sql_name)
             sql_sex     = tview.findViewById(R.id.sql_sex)
             sql_address = tview.findViewById(R.id.sql_address)
+
+            tview.setOnClickListener(this.clickHandler)
         }
     }
 

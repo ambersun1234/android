@@ -1,7 +1,6 @@
 package com.ambersun1234.zodiac;
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
