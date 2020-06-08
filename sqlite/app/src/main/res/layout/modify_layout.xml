@@ -40,20 +40,22 @@
     <EditText
         android:id="@+id/name_minput"
         android:layout_width="243dp"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/address_minput"
-        android:layout_width="243dp"
-        android:layout_height="35dp"
+        android:layout_width="245dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/address_modify"
         app:layout_constraintTop_toTopOf="@+id/address_modify" />
 

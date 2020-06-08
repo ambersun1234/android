@@ -10,21 +10,24 @@ import java.nio.ByteBuffer
 
 class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4) {
     private val table_name = "member"
-    private val ID_FILED = "_id"
-    private val NAME_FIELD = "name"
-    private val SEX_FIELD = "sex"
-    private val ADDRESS_FIELD = "address"
-    private val IMG_FIELD = "img"
 
     private lateinit var mydb: SQLiteDatabase
 
+    companion object {
+        val ID_FILED = "id"
+        val NAME_FIELD = "name"
+        val SEX_FIELD = "sex"
+        val ADDRESS_FIELD = "address"
+        val IMG_FIELD = "img"
+    }
+
     override fun onCreate(db: SQLiteDatabase?) {
         val sql = "CREATE TABLE if not exists ${this.table_name}(" +
-                "${this.ID_FILED} INTEGER PRIMARY KEY, " +
-                "${this.NAME_FIELD} TEXT NOT NULL, " +
-                "${this.SEX_FIELD} TEXT, " +
-                "${this.IMG_FIELD} BLOB, " +
-                "${this.ADDRESS_FIELD} TEXT);";
+                "${ID_FILED} INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "${NAME_FIELD} TEXT NOT NULL, " +
+                "${SEX_FIELD} TEXT, " +
+                "${IMG_FIELD} BLOB, " +
+                "${ADDRESS_FIELD} TEXT);";
         db?.execSQL(sql)
     }
 
@@ -41,7 +44,7 @@ class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4
         this.mydb = this.readableDatabase
         val c = this.mydb.query(
             this.table_name,
-            arrayOf(this.NAME_FIELD, this.SEX_FIELD, this.ADDRESS_FIELD, this.IMG_FIELD),
+            null,
             queryString,
             null,
             null,
@@ -63,6 +66,27 @@ class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4
         return ibytes
     }
 
+    fun updateData(
+        name: String,
+        sex: String,
+        address: String,
+        whereClause: String
+    ): Int {
+        this.mydb = this.writableDatabase
+        val cv = ContentValues()
+
+        cv.put(NAME_FIELD, name)
+        cv.put(SEX_FIELD, sex)
+        cv.put(ADDRESS_FIELD, address)
+
+        return this.mydb.update(
+            this.table_name,
+            cv,
+            whereClause,
+            null
+        )
+    }
+
     fun addData(
         name: String,
         sex: String,
@@ -71,12 +95,12 @@ class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4
     ): Long {
         this.mydb = this.writableDatabase
         val cv = ContentValues()
-        cv.put("name", name)
-        cv.put("sex", sex)
-        cv.put("address", address)
+        cv.put(NAME_FIELD, name)
+        cv.put(SEX_FIELD, sex)
+        cv.put(ADDRESS_FIELD, address)
 
         if (img != null) {
-            cv.put("img", this.convert2byte(img))
+            cv.put(IMG_FIELD, this.convert2byte(img))
         }
 
         return this.mydb.insert(this.table_name, null, cv)

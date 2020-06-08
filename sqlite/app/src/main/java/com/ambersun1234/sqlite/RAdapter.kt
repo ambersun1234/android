@@ -3,6 +3,7 @@ package com.ambersun1234.sqlite
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,9 +38,22 @@ class RAdapter(
                 val it = Intent(v?.context, modifyActivity::class.java)
                 val index = layoutPosition
 
-                it.putExtra("name", name_arr[index])
-                it.putExtra("sex", sex_arr[index])
-                it.putExtra("address", address_arr[index])
+                val db = memberdb(v?.context!!)
+                val mycursor = db.getDataInterface(
+                     "`${memberdb.NAME_FIELD}` = '" + name_arr[index] + "'" +
+                    " and `${memberdb.SEX_FIELD}` = '" + sex_arr[index] + "'" +
+                     " and `${memberdb.ADDRESS_FIELD}` = '" + address_arr[index] + "'",
+                    ""
+                )
+
+                var tid = ""
+                if (mycursor.count > 0 && mycursor.moveToFirst()) {
+                    do {
+                        tid = mycursor.getString(mycursor.getColumnIndex(memberdb.ID_FILED))
+                    } while (mycursor.moveToNext());
+                }
+                it.putExtra("id", tid)
+
                 ccontext.startActivity(it)
             }
         }

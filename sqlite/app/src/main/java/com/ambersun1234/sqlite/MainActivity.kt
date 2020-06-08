@@ -59,13 +59,18 @@ class MainActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
+                    showInit()
                 }
                 R.id.btn_query -> {
-
+                    showInit(
+                        if (name_input != "") "`${memberdb.NAME_FIELD}` %%LIKE%% '$name_input'" else "" +
+                        if (sex_input != "") " `${memberdb.SEX_FIELD}` = '$sex_input'" else "" +
+                        if (address_input != "") " `${memberdb.ADDRESS_FIELD}` %%LIKE%% '$address_input'" else "" ,
+                        ""
+                    )
                 }
                 R.id.btn_list -> {
-                    val mycursor = mydb.getDataInterface("", "")
-                    retrieveData(mycursor)
+                    showInit()
                 }
             }
             // end onclick function
@@ -76,6 +81,11 @@ class MainActivity : AppCompatActivity() {
         for (element in this.item_arr) {
             element.clear()
         }
+    }
+
+    fun showInit(whereClause: String = "", orderClause: String = "") {
+        val mycursor = mydb.getDataInterface(whereClause, orderClause)
+        this.retrieveData(mycursor)
     }
 
     fun retrieveData(mycursor: Cursor) {
@@ -107,6 +117,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         this.createRView()
+        Toast.makeText(
+            baseContext, "查詢結果如列表所示", Toast.LENGTH_SHORT
+        ).show()
     }
 
     fun createRView() {
@@ -143,5 +156,7 @@ class MainActivity : AppCompatActivity() {
         for (element in this.btn_arr) {
             element.setOnClickListener(this.clickHandler)
         }
+
+        this.showInit()
     }
 }
