@@ -94,11 +94,11 @@
         android:id="@+id/modify_btn"
         android:layout_width="350dp"
         android:layout_height="58dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/submit"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/sex_minput" />
+        app:layout_constraintTop_toBottomOf="@+id/img_show" />
 
     <Button
         android:id="@+id/cancel_btn"
@@ -109,5 +109,16 @@
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@+id/modify_btn"
         app:layout_constraintTop_toBottomOf="@+id/modify_btn" />
+
+    <ImageView
+        android:id="@+id/img_show"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:clickable="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/sex_minput"
+        app:srcCompat="@drawable/linux" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

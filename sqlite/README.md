@@ -1,5 +1,5 @@
 # sqlite
-xxx
+simple sqlite database usage, write, read db
 
 # ADB Shell
 + installation

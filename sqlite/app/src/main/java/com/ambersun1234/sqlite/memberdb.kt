@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
+import java.io.ByteArrayOutputStream
 import java.nio.ByteBuffer
 
 class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4) {
@@ -55,21 +56,19 @@ class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4
     }
 
     fun convert2byte(img: Bitmap): ByteArray {
-        val isize = img.byteCount
-        val ibuffer = ByteBuffer.allocate(isize)
-        val ibytes = ByteArray(isize)
+        // https://stackoverflow.com/a/7620610
+        var blob = ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        val bitmapdata = blob.toByteArray();
 
-        img.copyPixelsToBuffer(ibuffer)
-        ibuffer.rewind()
-        ibuffer.get(ibytes)
-
-        return ibytes
+        return bitmapdata
     }
 
     fun updateData(
         name: String,
         sex: String,
         address: String,
+        img: Bitmap?,
         whereClause: String
     ): Int {
         this.mydb = this.writableDatabase
@@ -78,6 +77,10 @@ class memberdb(context: Context): SQLiteOpenHelper(context, "member.db", null, 4
         cv.put(NAME_FIELD, name)
         cv.put(SEX_FIELD, sex)
         cv.put(ADDRESS_FIELD, address)
+
+        if (img != null) {
+            cv.put(IMG_FIELD, this.convert2byte(img))
+        }
 
         return this.mydb.update(
             this.table_name,

@@ -13,4 +13,5 @@
     <string name="btn_insert">寫入列表</string>
     <string name="submit">修改</string>
     <string name="cancel">取消</string>
+    <string name="img_prompt">點我更改照片</string>
 </resources>
