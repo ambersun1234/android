@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">stock</string>
+    <string name="stock_title">Taiwan Stock Exchange</string>
+    <string name="stock_stockName">Stock Name:</string>
+    <string name="stock_stockVolume">Stock Volums:</string>
+    <string name="stock_stockDividend">Dividend/year:</string>
+    <string name="stock_refresh">Click me to refresh stock</string>
+</resources>
