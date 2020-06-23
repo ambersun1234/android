@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">I5630fnl_I4A14</string>
+    <string name="action_add">加入所有幣別</string>
+    <string name="action_clear">全部清除</string>
+    <string name="title1">TWD(台幣)</string>
+    <string name="title2">匯率</string>
+    <string name="deleteConfirm">不顯示該貨幣？</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="showPrompt">台幣反向匯率</string>
+    <string name="add_prompt">選擇您要新增之類別</string>
+</resources>
